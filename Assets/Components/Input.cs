@@ -2,30 +2,29 @@ using TMPro;
 using UnityEngine;
 using Button = UnityEngine.UI.Button;
 
-namespace Components
+namespace Components;
+
+public class Input : MonoBehaviour
 {
-    public class Input : MonoBehaviour
+    public Button? SubmitButton;
+    public TMP_InputField? InputComponent;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
-        public Button SubmitButton;
-        public TMP_InputField InputComponent;
+        if (InputComponent != null)
+            InputComponent.onSubmit.AddListener(OnSubmit);
+    }
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-            if (InputComponent != null)
-                InputComponent.onSubmit.AddListener(OnSubmit);
-        }
+    private void OnSubmit(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return;
 
-        private void OnSubmit(string text)
-        {
-            if (string.IsNullOrEmpty(text))
-                return;
+        if (SubmitButton == null || InputComponent == null)
+            return;
 
-            if (SubmitButton != null)
-            {
-                SubmitButton.onClick.Invoke();
-                InputComponent.text = string.Empty;
-            }
-        }
+        SubmitButton.onClick.Invoke();
+        InputComponent.text = string.Empty;
     }
 }

@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "34432703a177c97631a4eb1d908f086037c67969"
     },
+    "com.kandreyc.unity-csharp-patch": {
+      "version": "https://github.com/kandreyc/unity-csharp-patch.git#v1.5.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "9a0428fa8f90c66deb13ead57f93dec6808dd4f8"
+    },
     "com.unity.2d.animation": {
       "version": "13.0.2",
       "depth": 0,

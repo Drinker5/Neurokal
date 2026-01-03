@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.github-glitchenzo.nugetforunity": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
+    "com.kandreyc.unity-csharp-patch": "https://github.com/kandreyc/unity-csharp-patch.git#v1.5.0",
     "com.unity.2d.animation": "13.0.2",
     "com.unity.2d.aseprite": "3.0.1",
     "com.unity.2d.enhancers": "1.0.0",
