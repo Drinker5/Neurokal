@@ -13,7 +13,7 @@ public sealed class Neuro : MonoBehaviour
     public TextMeshProUGUI? InputComponent;
     public Button? Button;
     public TextMeshProUGUI? FeedComponent;
-    public LLMCharacter? llmCharacter;
+    public LLMAgent? LlmAgent;
 
     void Start()
     {
@@ -29,25 +29,23 @@ public sealed class Neuro : MonoBehaviour
     {
         try
         {
-            if (InputComponent == null || FeedComponent == null || llmCharacter == null)
+            if (InputComponent == null ||
+                FeedComponent == null ||
+                LlmAgent == null)
                 return;
-        
-            llmCharacter.CancelRequests();
+
+            LlmAgent.CancelRequests();
             var sb = new StringBuilder();
             sb.Append("<color=green>");
             sb.Append(InputComponent.text);
             sb.Append("</color>");
             sb.Append(Environment.NewLine);
             FeedComponent.text = sb.ToString();
-            
-            await llmCharacter.Chat(InputComponent.text, reply =>
-            {
-                FeedComponent.text = reply;
-            },
-            () =>
-            {
-                Debug.LogError("complete");
-            });
+
+            await LlmAgent.Chat(
+                InputComponent.text,
+                reply => { FeedComponent.text = reply; },
+                completionCallback: () => { });
         }
         catch (Exception e)
         {
@@ -61,8 +59,8 @@ public sealed class Neuro : MonoBehaviour
 
         if (mode == PlayModeStateChange.ExitingPlayMode)
         {
-            if (llmCharacter != null)
-                llmCharacter.CancelRequests();
+            if (LlmAgent != null)
+                LlmAgent.CancelRequests();
         }
     }
 }
